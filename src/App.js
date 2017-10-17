@@ -15,7 +15,7 @@ const searchkit = new SearchkitManager(host)
 
 const PaperHitsGridItem = (props)=> {
   const {bemBlocks, result} = props
-  let url = "http://www.imdb.com/title/" + result._source.imdbId //TODO workout mechanism to point to https://papers.nips.cc/
+  let url = "https://papers.nips.cc/paper/" + result._source.pdf_name.split(".pdf")[0]
   const source = extend({}, result._source, result.highlight)
   return (
     <div className={bemBlocks.item().mix(bemBlocks.container("item"))} data-qa="hit">
@@ -29,7 +29,7 @@ const PaperHitsGridItem = (props)=> {
 
 const PaperHitsListItem = (props)=> {
   const {bemBlocks, result} = props
-  let url = "http://www.imdb.com/title/" + result._source.imdbId
+  let url = "https://papers.nips.cc/paper/" + result._source.pdf_name.split(".pdf")[0] 
   const source = extend({}, result._source, result.highlight)
   return (
     <div className={bemBlocks.item().mix(bemBlocks.container("item"))} data-qa="hit">
@@ -98,7 +98,7 @@ class App extends Component {
             </ActionBar>
             <ViewSwitcherHits
                 hitsPerPage={12} highlightFields={["title","plot"]}
-                sourceFilter={["plot", "title", "poster", "imdbId", "imdbRating", "year"]}
+                sourceFilter={["abstract", "authors", "citations", "pdf_name", "title", "year"]}
                 hitComponents={[
                   {key:"grid", title:"Grid", itemComponent:PaperHitsGridItem, defaultOption:true},
                   {key:"list", title:"List", itemComponent:PaperHitsListItem}
