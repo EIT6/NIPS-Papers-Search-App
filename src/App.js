@@ -31,7 +31,6 @@ const PaperHitsListItem = (props)=> {
   const {bemBlocks, result} = props
   let url = "https://papers.nips.cc/paper/" + result._source.pdf_name.split(".pdf")[0] 
   const source = extend({}, result._source, result.highlight)
-          console.log(source.authors)
   return (
     <div className={bemBlocks.item().mix(bemBlocks.container("item"))} data-qa="hit">
       <div className={bemBlocks.item("poster")}>
@@ -84,8 +83,9 @@ class App extends Component {
                 <ViewSwitcherToggle/>
                 <SortingSelector options={[
                   {label:"Relevance", field:"_score", order:"desc"},
-                  {label:"Latest Releases", field:"released", order:"desc"},
-                  {label:"Earliest Releases", field:"released", order:"asc"}
+                  {label:"Latest Publications", field:"year", order:"desc"},
+                  {label:"Earliest Publications", field:"year", order:"asc"},
+                  {label:"Most Citations", field:"citations", order:"desc"}                     
                 ]}/>
               </ActionBarRow>
 
