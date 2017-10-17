@@ -20,7 +20,7 @@ const PaperHitsGridItem = (props)=> {
   return (
     <div className={bemBlocks.item().mix(bemBlocks.container("item"))} data-qa="hit">
       <a href={url} target="_blank">
-        <img data-qa="poster" alt="presentation" className={bemBlocks.item("poster")} src={result._source.poster} width="170" height="240"/>
+        
         <div data-qa="title" className={bemBlocks.item("title")} dangerouslySetInnerHTML={{__html:source.title}}></div>
       </a>
     </div>
@@ -31,15 +31,15 @@ const PaperHitsListItem = (props)=> {
   const {bemBlocks, result} = props
   let url = "https://papers.nips.cc/paper/" + result._source.pdf_name.split(".pdf")[0] 
   const source = extend({}, result._source, result.highlight)
+          console.log(source.authors)
   return (
     <div className={bemBlocks.item().mix(bemBlocks.container("item"))} data-qa="hit">
       <div className={bemBlocks.item("poster")}>
-        <img alt="presentation" data-qa="poster" src={result._source.poster}/>
       </div>
       <div className={bemBlocks.item("details")}>
         <a href={url} target="_blank"><h2 className={bemBlocks.item("title")} dangerouslySetInnerHTML={{__html:source.title}}></h2></a>
-        <h3 className={bemBlocks.item("subtitle")}>Released in {source.year}, cited {source.citations} times</h3>
-        <div className={bemBlocks.item("text")} dangerouslySetInnerHTML={{__html:source.plot}}></div>
+        <h3 className={bemBlocks.item("subtitle")}>By {source.authors.join(", ")}. Released in {source.year}. Has been cited {source.citations} times in NIPS proceedings.</h3>
+        <div className={bemBlocks.item("text")} dangerouslySetInnerHTML={{__html:source.abstract}}></div>
       </div>
     </div>
   )
@@ -65,7 +65,6 @@ class App extends Component {
             <DynamicRangeFilter field="metaScore" id="metascore" title="Metascore" rangeFormatter={(count)=> count + "*"}/>
             <RangeFilter min={0} max={10} field="imdbRating" id="imdbRating" title="IMDB Rating" showHistogram={true}/>
             <InputFilter id="authors-search" searchThrottleTime={500} title="Authors" placeholder="Search authors" searchOnChange={true} queryFields={["authors"]} />
-            <RefinementListFilter id="actors" title="Actors" field="actors.raw" size={10}/>
             <RefinementListFilter id="writersFacets" translations={{"facets.view_more":"View more writers"}} title="Writers" field="writers.raw" operator="OR" size={10}/>
             <RefinementListFilter id="countries" title="Countries" field="countries.raw" operator="OR" size={10}/>
             <NumericRefinementListFilter id="runtimeMinutes" title="Length" field="runtimeMinutes" options={[
@@ -97,11 +96,11 @@ class App extends Component {
 
             </ActionBar>
             <ViewSwitcherHits
-                hitsPerPage={12} highlightFields={["title","plot"]}
+                hitsPerPage={12} highlightFields={["title","citations"]}
                 sourceFilter={["abstract", "authors", "citations", "pdf_name", "title", "year"]}
                 hitComponents={[
-                  {key:"grid", title:"Grid", itemComponent:PaperHitsGridItem, defaultOption:true},
-                  {key:"list", title:"List", itemComponent:PaperHitsListItem}
+                  {key:"list", title:"List", itemComponent:PaperHitsListItem, defaultOption:true},
+                  {key:"grid", title:"Grid", itemComponent:PaperHitsGridItem}
                 ]}
                 scrollTo="body"
             />
