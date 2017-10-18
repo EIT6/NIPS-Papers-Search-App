@@ -56,7 +56,7 @@ class App extends Component {
         <LayoutBody>
 
           <SideBar>
-            <RangeFilter min={0} max={1000} field="citations" id="citations" title="Citation Counts" showHistogram={true}/>
+            <RangeFilter min={0} max={53} field="citations" id="citations" title="Citation Counts" showHistogram={true}/>
             <RangeFilter min={1987} max={2017} field="year" id="year" title="Publication Year" showHistogram={true}/>
             <RefinementListFilter id="authors" title="Authors" field="authors.raw" size={10}/>
 
