@@ -38,6 +38,9 @@ const PaperHitsListItem = (props)=> {
       <div className={bemBlocks.item("details")}>
         <a href={url} target="_blank"><h2 className={bemBlocks.item("title")} dangerouslySetInnerHTML={{__html:source.title}}></h2></a>
         <h3 className={bemBlocks.item("subtitle")}>By {source.authors.join(", ")}. Released in {source.year}. Has been cited {source.citations} times in NIPS proceedings.</h3>
+        <h4>Top Keywords (In Order of Importance):</h4>
+        <div className={bemBlocks.item("text")} dangerouslySetInnerHTML={{__html:source.keywords.join(", ")}}></div>
+        <h4>Abstract:</h4>
         <div className={bemBlocks.item("text")} dangerouslySetInnerHTML={{__html:source.abstract}}></div>
       </div>
     </div>
@@ -97,7 +100,7 @@ class App extends Component {
             </ActionBar>
             <ViewSwitcherHits
                 hitsPerPage={12} highlightFields={["title","citations"]}
-                sourceFilter={["abstract", "authors", "citations", "pdf_name", "title", "year"]}
+                sourceFilter={["abstract", "authors", "citations", "pdf_name", "title", "year", "keywords"]}
                 hitComponents={[
                   {key:"list", title:"List", itemComponent:PaperHitsListItem, defaultOption:true},
                   {key:"grid", title:"Grid", itemComponent:PaperHitsGridItem}
