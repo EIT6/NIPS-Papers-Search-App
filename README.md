@@ -1,5 +1,6 @@
 # NIPS Papers Search App
 
+
 This is the web application of our group project for **2IMM15 Web Information Retrieval & Data Mining** at [Eindhoven University of Technology](https://tue.nl).
 
 ## Web Application
