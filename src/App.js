@@ -61,14 +61,17 @@ class App extends Component {
           <SideBar>
             <RangeFilter min={0} max={53} field="citations" id="citations" title="Citation Counts" showHistogram={true}/>
             <RangeFilter min={1987} max={2017} field="year" id="year" title="Publication Year" showHistogram={true}/>
+            <InputFilter id="authors-search" searchThrottleTime={500} title="Filter Authors" placeholder="Author name" searchOnChange={true} queryFields={["authors"]} />
+            <RefinementListFilter id="authors" title="Authors With Most Publications" field="authors.raw" size={10}/>
+            <InputFilter id="keywords-search" searchThrottleTime={500} title="Filter Keywords" placeholder="Keywords" searchOnChange={true} queryFields={["keywords"]} />        
             <RefinementListFilter id="topkeywords" title="Top Keywords" field="keywords.raw" size={5}/>
-            <RefinementListFilter id="authors" title="Authors" field="authors.raw" size={10}/>
+           
         
 
             <HierarchicalMenuFilter fields={["type.raw", "genres.raw"]} title="Categories" id="categories"/>
             <DynamicRangeFilter field="metaScore" id="metascore" title="Metascore" rangeFormatter={(count)=> count + "*"}/>
             <RangeFilter min={0} max={10} field="imdbRating" id="imdbRating" title="IMDB Rating" showHistogram={true}/>
-            <InputFilter id="authors-search" searchThrottleTime={500} title="Authors" placeholder="Search authors" searchOnChange={true} queryFields={["authors"]} />
+        
             <RefinementListFilter id="writersFacets" translations={{"facets.view_more":"View more writers"}} title="Writers" field="writers.raw" operator="OR" size={10}/>
             <RefinementListFilter id="countries" title="Countries" field="countries.raw" operator="OR" size={10}/>
             <NumericRefinementListFilter id="runtimeMinutes" title="Length" field="runtimeMinutes" options={[
@@ -102,7 +105,7 @@ class App extends Component {
             </ActionBar>
             <ViewSwitcherHits
                 hitsPerPage={12} highlightFields={["title","citations"]}
-                sourceFilter={["abstract", "authors", "citations", "pdf_name", "title", "year", "top_keywords"]}
+                sourceFilter={["abstract", "authors", "citations", "pdf_name", "title", "year", "top_keywords", "keywords"]}
                 hitComponents={[
                   {key:"list", title:"List", itemComponent:PaperHitsListItem, defaultOption:true},
                   {key:"grid", title:"Grid", itemComponent:PaperHitsGridItem}
