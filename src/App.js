@@ -39,7 +39,7 @@ const PaperHitsListItem = (props)=> {
         <a href={url} target="_blank"><h1 className={bemBlocks.item("title")} dangerouslySetInnerHTML={{__html:source.title}}></h1></a>
         <h4 className={bemBlocks.item("subtitle")}>By {source.authors.join(", ")}. Released in {source.year}. Has been cited {source.citations} times in NIPS proceedings.</h4>
         <h4>Top Keywords (In order of Importance):</h4>
-        <div className={bemBlocks.item("text")} dangerouslySetInnerHTML={{__html:source.keywords.join(", ")}}></div>
+        <div className={bemBlocks.item("text")} dangerouslySetInnerHTML={{__html:source.top_keywords.join(", ")}}></div>
         <h4>Abstract:</h4>
         <div className={bemBlocks.item("text")} dangerouslySetInnerHTML={{__html:source.abstract}}></div>
       </div>
