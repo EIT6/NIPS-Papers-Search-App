@@ -61,7 +61,9 @@ class App extends Component {
           <SideBar>
             <RangeFilter min={0} max={53} field="citations" id="citations" title="Citation Counts" showHistogram={true}/>
             <RangeFilter min={1987} max={2017} field="year" id="year" title="Publication Year" showHistogram={true}/>
+            <RefinementListFilter id="topkeywords" title="Top Keywords" field="keywords.raw" size={5}/>
             <RefinementListFilter id="authors" title="Authors" field="authors.raw" size={10}/>
+        
 
             <HierarchicalMenuFilter fields={["type.raw", "genres.raw"]} title="Categories" id="categories"/>
             <DynamicRangeFilter field="metaScore" id="metascore" title="Metascore" rangeFormatter={(count)=> count + "*"}/>
