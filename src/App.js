@@ -54,7 +54,7 @@ class App extends Component {
         <Layout>
           <TopBar>
             <div className="my-logo">NIPS Papers IR System</div>
-            <SearchBox autofocus={true} searchOnChange={true} prefixQueryFields={["abstract^1","title^2"]}/>
+            <SearchBox autofocus={true} searchOnChange={true} prefixQueryFields={["full_body^1","abstract^2","title^4"]}/>
           </TopBar>
         <LayoutBody>
 
@@ -105,7 +105,7 @@ class App extends Component {
             </ActionBar>
             <ViewSwitcherHits
                 hitsPerPage={12} highlightFields={["title","citations"]}
-                sourceFilter={["abstract", "authors", "citations", "pdf_name", "title", "year", "top_keywords", "keywords"]}
+                sourceFilter={["abstract", "authors", "citations", "pdf_name", "title", "year", "top_keywords", "keywords", "full_body"]}
                 hitComponents={[
                   {key:"list", title:"List", itemComponent:PaperHitsListItem, defaultOption:true},
                   {key:"grid", title:"Grid", itemComponent:PaperHitsGridItem}
